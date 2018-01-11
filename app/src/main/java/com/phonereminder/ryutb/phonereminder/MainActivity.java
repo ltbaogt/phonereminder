@@ -2,41 +2,61 @@ package com.phonereminder.ryutb.phonereminder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.startService)
+    Button btnStartService;
+    @BindView(R.id.stopService)
+    Button btnStopService;
+
+    ContactListFragment mContactListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             }
         });
-        findViewById(R.id.startService).setOnClickListener(new View.OnClickListener() {
+        btnStartService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startBubbleMngService();
             }
         });
 
-        findViewById(R.id.stopService).setOnClickListener(new View.OnClickListener() {
+        btnStopService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopBubbleMngService();
             }
         });
+
+        mContactListFragment = new ContactListFragment();
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("ABC", "ABC---").apply();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contactList, mContactListFragment)
+                .commit();
     }
     private void startBubbleMngService() {
         Intent intent = new Intent(getApplicationContext(), BubbleManagementService.class);

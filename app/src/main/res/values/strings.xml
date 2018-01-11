@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">PhoneReminder</string>
     <string name="action_settings">Settings</string>
+    <string name="customFont_OpenSans_Semibold">OpenSans-Semibold.ttf</string>
+    <string name="customFont_OpenSans_Italic">OpenSans-Italic.ttf</string>
+    <string name="customFont_OpenSans_Regular">OpenSans-Regular.ttf</string>
 </resources>

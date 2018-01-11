@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -85,7 +86,8 @@ public class BubbleManagementService extends Service {
 
             @Override
             public void onBubbleClick(BubbleLayout bubble) {
-                Toast.makeText(getApplicationContext(), "Clicked !",
+                String str = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("ABC", "---");
+                Toast.makeText(getApplicationContext(), "Clicked !" + str,
                         Toast.LENGTH_SHORT).show();
             }
         });
