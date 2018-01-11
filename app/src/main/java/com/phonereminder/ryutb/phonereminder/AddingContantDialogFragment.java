@@ -2,6 +2,7 @@ package com.phonereminder.ryutb.phonereminder;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,12 @@ public class AddingContantDialogFragment extends BaseDialogFragment {
     AppTextView tvPhone;
     @BindView(R.id.etNote)
     AppEditText etNote;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog_Alert);
+    }
 
     @Nullable
     @Override

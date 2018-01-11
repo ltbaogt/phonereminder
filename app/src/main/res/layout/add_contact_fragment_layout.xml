@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_common_popup_rounded_grey"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,12 +28,12 @@
             android:layout_marginLeft="@dimen/common_margin_content"
             android:layout_marginRight="@dimen/common_margin_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/et_background_02"
             android:orientation="vertical"
             android:paddingBottom="8dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="8dp">
+
             <com.phonereminder.ryutb.phonereminder.control.AppTextView
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
@@ -46,7 +47,9 @@
             <com.phonereminder.ryutb.phonereminder.control.AppEditText
                 android:id="@+id/etNote"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_background_01"
+                android:minLines="5" />
 
         </LinearLayout>
 
