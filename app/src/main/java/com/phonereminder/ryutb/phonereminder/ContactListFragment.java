@@ -95,8 +95,11 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
         btnSearchContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSearchString = etContactName.getText().toString().trim();
-                getLoaderManager().restartLoader(0, null, ContactListFragment.this);
+//                mSearchString = etContactName.getText().toString().trim();
+//                getLoaderManager().restartLoader(0, null, ContactListFragment.this);
+                AddingContantDialogFragment dialogFragment = new AddingContantDialogFragment();
+                dialogFragment.show(getChildFragmentManager(), "");
+
             }
         });
 

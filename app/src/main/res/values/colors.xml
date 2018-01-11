@@ -61,4 +61,11 @@
     <color name="highlight_on_dark_grey">#333333</color>
     <color name="highlight_on_light_grey">#DDDDDD</color>
     <color name="gray_separator">#dadada</color>
+
+    <color name="bg_divider">#e0e0e0</color>
+    <color name="grey_pressed">#837d7d</color>
+    <color name="orange">#ffac2c</color>
+    <color name="grey_transparent">#868e8888</color>
+    <color name="btn_login_disable">@color/grey_transparent</color>
+    <color name="background_grey">#F8F8F8</color>
 </resources>

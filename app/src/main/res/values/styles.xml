@@ -13,5 +13,17 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="propverify_btn_neg">
+        <item name="android:background">@drawable/bg_cancel_service</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="customFont">@string/customFont_OpenSans_Semibold</item>
+    </style>
 
+    <style name="propverify_btn_pos_1">
+        <item name="android:background">@drawable/btn_possitive</item>
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="customFont">@string/customFont_OpenSans_Semibold</item>
+    </style>
 </resources>
