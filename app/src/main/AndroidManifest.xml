@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -24,7 +25,11 @@
         </activity>
         <service android:name=".bubbles.BubblesService"
             android:enabled="true"
+            android:process=":ryutbproc"
             android:exported="false" />
+        <service android:name=".BubbleManagementService"
+            android:process=":ryutbproc"
+            android:enabled="true" />
     </application>
 
 </manifest>
