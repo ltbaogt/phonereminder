@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void stopBubbleMngService() {
-
+        Intent intent = new Intent(getApplicationContext(), BubbleManagementService.class);
+        stopService(intent);
     }
 
     @Override
