@@ -10,7 +10,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
+
+import com.phonereminder.ryutb.phonereminder.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +39,8 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
     EditText etContactName;
     @BindView(R.id.btnSearchContact)
     Button btnSearchContact;
+
+    private AddingContantDialogFragment mContactDetailFragment;
 
     private final static String[] FROM_COLUMNS = {
             Build.VERSION.SDK_INT
@@ -95,10 +98,9 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
         btnSearchContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mSearchString = etContactName.getText().toString().trim();
-//                getLoaderManager().restartLoader(0, null, ContactListFragment.this);
-                AddingContantDialogFragment dialogFragment = new AddingContantDialogFragment();
-                dialogFragment.show(getChildFragmentManager(), "");
+                mSearchString = etContactName.getText().toString().trim();
+                getLoaderManager().restartLoader(0, null, ContactListFragment.this);
+
 
             }
         });
@@ -148,7 +150,6 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("Number", "Start1");
 // Get the Cursor
         Cursor cursor = ((CursorAdapter)parent.getAdapter()).getCursor();
         // Move to the selected contact
@@ -160,7 +161,6 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
         // Create the contact's content Uri
         mContactUri = ContactsContract.Contacts.getLookupUri(mContactId, mContactKey);
 
-        Log.i("Number", "Start2");
         Cursor phones = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ mContactId,null, null);
         if (phones != null) {
             while (phones.moveToNext()) {
@@ -168,12 +168,14 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
                 Toast.makeText(getContext(), phoneNumber, Toast.LENGTH_SHORT).show();
                 if (!TextUtils.isEmpty(phoneNumber)) break;
             }
-            Log.i("Number", "Stop");
             phones.close();
         }
         /*
          * You can use mContactUri as the content URI for retrieving
          * the details for a contact.
          */
+        if (mContactDetailFragment != null && mContactDetailFragment.getDialog() != null && mContactDetailFragment.getDialog().isShowing()) return;
+        mContactDetailFragment = AddingContantDialogFragment.getInstance(mContactUri);
+        mContactDetailFragment.show(getChildFragmentManager(), "");
     }
 }

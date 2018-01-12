@@ -1,4 +1,4 @@
-package com.phonereminder.ryutb.phonereminder;
+package com.phonereminder.ryutb.phonereminder.base;
 
 import android.support.v4.app.Fragment;
 
