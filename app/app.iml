@@ -113,6 +113,7 @@
     <orderEntry type="library" name="com.android.support:design-25.1.0" level="project" />
     <orderEntry type="library" name="com.android.support:appcompat-v7-25.1.0" level="project" />
     <orderEntry type="library" name="com.android.support:transition-25.1.0" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.3.1@jar" level="project" />
     <orderEntry type="library" name="com.android.support:support-core-ui-25.1.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-compat-25.1.0" level="project" />
     <orderEntry type="library" name="com.android.support:support-media-compat-25.1.0" level="project" />

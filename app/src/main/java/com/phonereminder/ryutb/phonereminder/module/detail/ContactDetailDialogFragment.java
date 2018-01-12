@@ -14,10 +14,13 @@ import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.base.BaseDialogFragment;
 import com.phonereminder.ryutb.phonereminder.control.AppEditText;
 import com.phonereminder.ryutb.phonereminder.control.AppTextView;
+import com.phonereminder.ryutb.phonereminder.model.ReminderItem;
 import com.phonereminder.ryutb.phonereminder.util.Constants;
+import com.phonereminder.ryutb.phonereminder.util.SharePrefUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -34,8 +37,16 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
     @BindView(R.id.etNote)
     AppEditText etNote;
 
-    Uri mContactUri;
-    ContactDetailMvp.Presenter mPresenter;
+    @OnClick(R.id.btnPos)
+    void createReminder() {
+        ReminderItem item = new ReminderItem(mContactName, mContactNumber, etNote.getText().toString().trim());
+        SharePrefUtil.putReminderItem(getContext(), item);
+    }
+
+    private Uri mContactUri;
+    private String mContactName;
+    private String mContactNumber;
+    private ContactDetailMvp.Presenter mPresenter;
 
     public static ContactDetailDialogFragment getInstance(Uri contactUri) {
         ContactDetailDialogFragment fragment = new ContactDetailDialogFragment();
@@ -80,7 +91,6 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
 
     @Override
     public void displayName() {
-        String contactName = null;
 
         // querying contact data store
         Cursor cursor = getActivity().getContentResolver().query(mContactUri, null, null, null, null);
@@ -89,8 +99,8 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
             // DISPLAY_NAME = The display name for the contact.
             // HAS_PHONE_NUMBER =   An indicator of whether this contact has at least one phone number.
 
-            contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            tvName.setText(contactName);
+            mContactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            tvName.setText(mContactName);
         }
         cursor.close();
     }
@@ -98,8 +108,6 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
     @Override
     public void displayPhone() {
         String contactID = "";
-        String contactNumber = null;
-
         // getting contacts ID
         Cursor cursorID = getActivity().getContentResolver().query(mContactUri,
                 new String[]{ContactsContract.Contacts._ID},
@@ -124,8 +132,8 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
                 null);
 
         if (cursorPhone.moveToFirst()) {
-            contactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            tvPhone.setText(tvPhone.getText() + "\n" + contactNumber);
+            mContactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            tvPhone.setText(tvPhone.getText() + "\n" + mContactNumber);
         }
     }
 }
