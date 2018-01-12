@@ -1,4 +1,4 @@
-package com.phonereminder.ryutb.phonereminder;
+package com.phonereminder.ryutb.phonereminder.module.bubblemng;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
+import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout;
 import com.phonereminder.ryutb.phonereminder.bubbles.BubblesManager;
 import com.phonereminder.ryutb.phonereminder.bubbles.OnInitializedCallback;

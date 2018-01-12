@@ -1,4 +1,4 @@
-package com.phonereminder.ryutb.phonereminder;
+package com.phonereminder.ryutb.phonereminder.module.detail;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.base.BaseDialogFragment;
 import com.phonereminder.ryutb.phonereminder.control.AppEditText;
 import com.phonereminder.ryutb.phonereminder.control.AppTextView;
+import com.phonereminder.ryutb.phonereminder.util.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +24,7 @@ import butterknife.Unbinder;
  * Created by ryutb on 11/01/2018.
  */
 
-public class AddingContantDialogFragment extends BaseDialogFragment {
+public class ContactDetailDialogFragment extends BaseDialogFragment implements ContactDetailMvp.View {
 
     Unbinder mUnbinder;
     @BindView(R.id.tvName)
@@ -33,9 +35,10 @@ public class AddingContantDialogFragment extends BaseDialogFragment {
     AppEditText etNote;
 
     Uri mContactUri;
+    ContactDetailMvp.Presenter mPresenter;
 
-    public static AddingContantDialogFragment getInstance(Uri contactUri) {
-        AddingContantDialogFragment fragment = new AddingContantDialogFragment();
+    public static ContactDetailDialogFragment getInstance(Uri contactUri) {
+        ContactDetailDialogFragment fragment = new ContactDetailDialogFragment();
         Bundle arg = fragment.getArguments();
         if (arg == null) arg = new Bundle();
         arg.putString(Constants.CONTACT_URI, contactUri.toString());
@@ -56,8 +59,9 @@ public class AddingContantDialogFragment extends BaseDialogFragment {
         View fragmentView = inflater.inflate(R.layout.add_contact_fragment_layout, container, false);
         mUnbinder = ButterKnife.bind(this, fragmentView);
         mContactUri = Uri.parse(getArguments().getString(Constants.CONTACT_URI));
-        retrieveContactName();
-        retrieveContactNumber();
+        setupMvp();
+        mPresenter.renderName();
+        mPresenter.renderPhone();
         return fragmentView;
     }
 
@@ -65,10 +69,17 @@ public class AddingContantDialogFragment extends BaseDialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+        mPresenter.destroy();
+        mPresenter = null;
     }
 
-    private void retrieveContactName() {
+    @Override
+    public void setupMvp() {
+        mPresenter = new ContactDetailPresenter(this, new ContactDetailModel());
+    }
 
+    @Override
+    public void displayName() {
         String contactName = null;
 
         // querying contact data store
@@ -84,8 +95,8 @@ public class AddingContantDialogFragment extends BaseDialogFragment {
         cursor.close();
     }
 
-    private void retrieveContactNumber() {
-
+    @Override
+    public void displayPhone() {
         String contactID = "";
         String contactNumber = null;
 
@@ -116,7 +127,5 @@ public class AddingContantDialogFragment extends BaseDialogFragment {
             contactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
             tvPhone.setText(tvPhone.getText() + "\n" + contactNumber);
         }
-
-        cursorPhone.close();
     }
 }

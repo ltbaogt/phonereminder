@@ -1,4 +1,4 @@
-package com.phonereminder.ryutb.phonereminder;
+package com.phonereminder.ryutb.phonereminder.module.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.phonereminder.ryutb.phonereminder.R;
+import com.phonereminder.ryutb.phonereminder.module.bubblemng.BubbleManagementService;
+import com.phonereminder.ryutb.phonereminder.module.list.ContactListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

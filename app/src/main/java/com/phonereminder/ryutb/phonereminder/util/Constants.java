@@ -1,9 +1,9 @@
-package com.phonereminder.ryutb.phonereminder;
+package com.phonereminder.ryutb.phonereminder.util;
 
 /**
  * Created by ryutb on 12/01/2018.
  */
 
-class Constants {
+public class Constants {
     public static final String CONTACT_URI = "CONTACT_URI";
 }

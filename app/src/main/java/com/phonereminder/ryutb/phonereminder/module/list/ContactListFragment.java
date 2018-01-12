@@ -1,4 +1,4 @@
-package com.phonereminder.ryutb.phonereminder;
+package com.phonereminder.ryutb.phonereminder.module.list;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -21,7 +21,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.base.BaseFragment;
+import com.phonereminder.ryutb.phonereminder.module.detail.ContactDetailDialogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +42,7 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
     @BindView(R.id.btnSearchContact)
     Button btnSearchContact;
 
-    private AddingContantDialogFragment mContactDetailFragment;
+    private ContactDetailDialogFragment mContactDetailFragment;
 
     private final static String[] FROM_COLUMNS = {
             Build.VERSION.SDK_INT
@@ -175,7 +177,7 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
          * the details for a contact.
          */
         if (mContactDetailFragment != null && mContactDetailFragment.getDialog() != null && mContactDetailFragment.getDialog().isShowing()) return;
-        mContactDetailFragment = AddingContantDialogFragment.getInstance(mContactUri);
+        mContactDetailFragment = ContactDetailDialogFragment.getInstance(mContactUri);
         mContactDetailFragment.show(getChildFragmentManager(), "");
     }
 }
