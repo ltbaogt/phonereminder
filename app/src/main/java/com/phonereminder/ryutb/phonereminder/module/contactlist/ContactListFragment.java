@@ -1,4 +1,4 @@
-package com.phonereminder.ryutb.phonereminder.module.list;
+package com.phonereminder.ryutb.phonereminder.module.contactlist;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.base.BaseFragment;
-import com.phonereminder.ryutb.phonereminder.module.detail.ContactDetailDialogFragment;
+import com.phonereminder.ryutb.phonereminder.module.contactdetail.ContactDetailDialogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

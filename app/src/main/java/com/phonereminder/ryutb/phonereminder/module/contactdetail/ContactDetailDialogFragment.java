@@ -1,4 +1,4 @@
-package com.phonereminder.ryutb.phonereminder.module.detail;
+package com.phonereminder.ryutb.phonereminder.module.contactdetail;
 
 import android.database.Cursor;
 import android.net.Uri;

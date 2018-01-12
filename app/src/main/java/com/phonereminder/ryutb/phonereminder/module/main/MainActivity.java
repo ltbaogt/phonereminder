@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.module.bubblemng.BubbleManagementService;
-import com.phonereminder.ryutb.phonereminder.module.list.ContactListFragment;
+import com.phonereminder.ryutb.phonereminder.module.contactlist.ContactListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
