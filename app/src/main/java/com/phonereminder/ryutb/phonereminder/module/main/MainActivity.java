@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.module.bubblemng.BubbleManagementService;
-import com.phonereminder.ryutb.phonereminder.module.contactlist.ContactListFragment;
+import com.phonereminder.ryutb.phonereminder.module.contactlist.ContactListFragment2;
 import com.phonereminder.ryutb.phonereminder.module.reminderlist.ReminderListFragment;
 
 import butterknife.BindView;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.stopService)
     Button btnStopService;
 
-    ContactListFragment mContactListFragment;
+    ContactListFragment2 mContactListFragment;
     ReminderListFragment mReminderListFragment;
 
     @Override
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mContactListFragment = new ContactListFragment();
+        mContactListFragment = new ContactListFragment2();
         mReminderListFragment = new ReminderListFragment();
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("ABC", "ABC---").apply();
         getSupportFragmentManager().beginTransaction()

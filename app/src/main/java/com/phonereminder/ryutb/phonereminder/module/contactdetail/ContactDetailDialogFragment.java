@@ -49,6 +49,7 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
     void createReminder() {
         ReminderItem item = new ReminderItem(mContactName, mContactNumber, etNote.getText().toString().trim());
         SharePrefUtil.putReminderItem(getContext(), item);
+        dismiss();
         if (mlistener != null) mlistener.onClickAdd();
     }
 
@@ -135,33 +136,13 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
 
     @Override
     public void displayPhone() {
-        String contactID = "";
-        // getting contacts ID
-        Cursor cursorID = getActivity().getContentResolver().query(mContactUri,
-                new String[]{ContactsContract.Contacts._ID},
-                null, null, null);
-
-        if (cursorID.moveToFirst()) {
-
-            contactID = cursorID.getString(cursorID.getColumnIndex(ContactsContract.Contacts._ID));
-        }
-
-        cursorID.close();
 
         // Using the contact ID now we will get contact phone number
-        Cursor cursorPhone = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER},
+        Cursor cursorPhone = getActivity().getContentResolver().query(mContactUri,null,null,null,null);
 
-                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ? AND " +
-                        ContactsContract.CommonDataKinds.Phone.TYPE + " = " +
-                        ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE,
-
-                new String[]{contactID},
-                null);
-
-        if (cursorPhone.moveToFirst()) {
+        if (cursorPhone != null && cursorPhone.moveToFirst()) {
             mContactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            tvPhone.setText(tvPhone.getText() + "\n" + mContactNumber);
+            tvPhone.setText(String.valueOf(mContactNumber));
         }
     }
 
