@@ -17,6 +17,10 @@ import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout;
 import com.phonereminder.ryutb.phonereminder.bubbles.BubblesManager;
 import com.phonereminder.ryutb.phonereminder.bubbles.OnInitializedCallback;
+import com.phonereminder.ryutb.phonereminder.model.ReminderItem;
+import com.phonereminder.ryutb.phonereminder.util.SharePrefUtil;
+
+import java.util.List;
 
 /**
  * Created by ryutb on 10/01/2018.
@@ -28,10 +32,19 @@ public class BubbleManagementService extends Service {
     private BroadcastReceiver mPhoneCallReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("BubbleManagementService","BubbleManagementService");
+            Log.d("BubbleManagementService", "BubbleManagementService");
             String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+            String phoneNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+            phoneNumber = phoneNumber == null ? "" : phoneNumber;
             if (TelephonyManager.EXTRA_STATE_RINGING.equalsIgnoreCase(state)) {
-                addNewBubble();
+                List<ReminderItem> list = SharePrefUtil.getReminderListItem(getApplicationContext());
+                if (list != null) {
+                    for (ReminderItem item : list) {
+                        if (item.getPhone().equalsIgnoreCase(phoneNumber)) {
+                            addNewBubble();
+                        }
+                    }
+                }
             } else {
                 Toast.makeText(context, state, Toast.LENGTH_SHORT).show();
             }
@@ -81,7 +94,8 @@ public class BubbleManagementService extends Service {
         BubbleLayout bubbleView = (BubbleLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.bubble_layout, null);
         bubbleView.setOnBubbleRemoveListener(new BubbleLayout.OnBubbleRemoveListener() {
             @Override
-            public void onBubbleRemoved(BubbleLayout bubble) { }
+            public void onBubbleRemoved(BubbleLayout bubble) {
+            }
         });
         bubbleView.setOnBubbleClickListener(new BubbleLayout.OnBubbleClickListener() {
 
