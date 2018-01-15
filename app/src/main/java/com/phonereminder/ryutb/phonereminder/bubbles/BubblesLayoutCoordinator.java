@@ -24,8 +24,11 @@
  */
 package com.phonereminder.ryutb.phonereminder.bubbles;
 
+import android.content.Context;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.phonereminder.ryutb.phonereminder.util.ViewUtils;
 
 final class BubblesLayoutCoordinator {
     private static BubblesLayoutCoordinator INSTANCE;
@@ -66,16 +69,19 @@ final class BubblesLayoutCoordinator {
         windowManager.updateViewLayout(bubble, bubble.getViewParams());
     }
 
+    private int getWaveMarginWidth(Context ctx) {
+        return ViewUtils.convertDp2Px(ctx, 100);
+    }
     private boolean checkIfBubbleIsOverTrash(BubbleLayout bubble) {
         boolean result = false;
         if (trashView.getVisibility() == View.VISIBLE) {
             View trashContentView = getTrashContent();
             int trashWidth = trashContentView.getMeasuredWidth();
             int trashHeight = trashContentView.getMeasuredHeight();
-            int trashLeft = (trashContentView.getLeft() - (trashWidth / 2));
-            int trashRight = (trashContentView.getLeft() + trashWidth + (trashWidth / 2));
-            int trashTop = (trashContentView.getTop() - (trashHeight / 2));
-            int trashBottom = (trashContentView.getTop() + trashHeight + (trashHeight / 2));
+            int trashLeft = (trashContentView.getLeft() - (trashWidth / 2)) - getWaveMarginWidth(trashContentView.getContext());
+            int trashRight = (trashContentView.getLeft() + trashWidth + (trashWidth / 2)) + getWaveMarginWidth(trashContentView.getContext());
+            int trashTop = (trashContentView.getTop() - (trashHeight / 2)) - getWaveMarginWidth(trashContentView.getContext());
+            int trashBottom = (trashContentView.getTop() + trashHeight + (trashHeight / 2)) + getWaveMarginWidth(trashContentView.getContext());
             int bubbleWidth = bubble.getMeasuredWidth();
             int bubbleHeight = bubble.getMeasuredHeight();
             int bubbleLeft = bubble.getViewParams().x;

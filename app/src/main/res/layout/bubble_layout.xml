@@ -22,36 +22,40 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="160dp"
-    android:layout_height="160dp"
+<com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/bubblewith"
+    android:layout_height="@dimen/bubblewith"
     android:clipChildren="false"
     android:clipToPadding="false">
 
     <com.phonereminder.ryutb.phonereminder.control.ConnectingWaveAnimationView
-        android:layout_width="160dp"
-        android:layout_height="160dp" />
+        android:layout_width="@dimen/bubblewith"
+        android:layout_height="@dimen/bubblewith" />
 
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+    <FrameLayout
         android:layout_gravity="center"
-        android:background="@drawable/profile_decorator"
-        android:scaleType="centerCrop"
-        android:src="@drawable/profile" />
-
-    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/bubble_counter_bkg"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:text="1"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:background="@drawable/profile_decorator"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/bubble_counter_bkg"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </FrameLayout>
 </com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout>
