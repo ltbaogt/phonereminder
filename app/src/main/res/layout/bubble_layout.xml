@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright Txus Ballesteros 2015 (@txusballesteros)
  *
  * This file is part of some open source application.
@@ -25,10 +24,14 @@
 -->
 <com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
     android:clipChildren="false"
     android:clipToPadding="false">
+
+    <com.phonereminder.ryutb.phonereminder.control.ConnectingWaveAnimationView
+        android:layout_width="160dp"
+        android:layout_height="160dp" />
 
     <ImageView
         android:id="@+id/avatar"
@@ -36,19 +39,19 @@
         android:layout_height="70dp"
         android:layout_gravity="center"
         android:background="@drawable/profile_decorator"
-        android:src="@drawable/profile"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:layout_marginTop="2dp"
         android:layout_marginLeft="2dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/bubble_counter_bkg"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:background="@drawable/bubble_counter_bkg"
-        android:text="1"/>
+        android:text="1"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
 </com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout>

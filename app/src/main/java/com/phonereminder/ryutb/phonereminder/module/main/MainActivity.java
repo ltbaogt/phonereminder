@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.module.bubblemng.BubbleManagementService;
 import com.phonereminder.ryutb.phonereminder.module.contactlist.ContactListFragment;
+import com.phonereminder.ryutb.phonereminder.module.reminderlist.ReminderListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnStopService;
 
     ContactListFragment mContactListFragment;
+    ReminderListFragment mReminderListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +59,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mContactListFragment = new ContactListFragment();
+        mReminderListFragment = new ReminderListFragment();
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("ABC", "ABC---").apply();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contactList, mContactListFragment)
                 .commit();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.reminderList, mReminderListFragment)
+                .commit();
+    }
+
+    public void updateReminderList() {
+        if (mReminderListFragment != null) mReminderListFragment.updateList();
     }
     private void startBubbleMngService() {
         Intent intent = new Intent(getApplicationContext(), BubbleManagementService.class);

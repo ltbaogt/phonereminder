@@ -29,6 +29,14 @@ import butterknife.Unbinder;
 
 public class ContactDetailDialogFragment extends BaseDialogFragment implements ContactDetailMvp.View {
 
+    public interface OnDialogFragmentClickListener {
+        void onDismiss();
+
+        void onClickAdd();
+
+        void onClickCancel();
+    }
+
     Unbinder mUnbinder;
     @BindView(R.id.tvName)
     AppTextView tvName;
@@ -41,11 +49,13 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
     void createReminder() {
         ReminderItem item = new ReminderItem(mContactName, mContactNumber, etNote.getText().toString().trim());
         SharePrefUtil.putReminderItem(getContext(), item);
+        if (mlistener != null) mlistener.onClickAdd();
     }
 
     private Uri mContactUri;
     private String mContactName;
     private String mContactNumber;
+    private OnDialogFragmentClickListener mlistener;
     private ContactDetailMvp.Presenter mPresenter;
 
     public static ContactDetailDialogFragment getInstance(Uri contactUri) {
@@ -55,6 +65,10 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
         arg.putString(Constants.CONTACT_URI, contactUri.toString());
         fragment.setArguments(arg);
         return fragment;
+    }
+
+    public void setOnDialogFragmentClickListener(OnDialogFragmentClickListener listener) {
+        this.mlistener = listener;
     }
 
     @Override
@@ -82,6 +96,13 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
         mUnbinder.unbind();
         mPresenter.destroy();
         mPresenter = null;
+    }
+
+    public void updateContactUri(Uri cUri) {
+        Bundle arg = getArguments();
+        if (arg == null) arg = new Bundle();
+        arg.putString(Constants.CONTACT_URI, cUri.toString());
+        setArguments(arg);
     }
 
     @Override

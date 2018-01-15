@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.base.BaseFragment;
 import com.phonereminder.ryutb.phonereminder.module.contactdetail.ContactDetailDialogFragment;
+import com.phonereminder.ryutb.phonereminder.module.main.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +33,7 @@ import butterknife.ButterKnife;
  * Created by ryutb on 11/01/2018.
  */
 
-public class ContactListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
+public class ContactListFragment extends BaseFragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, ContactDetailDialogFragment.OnDialogFragmentClickListener {
 
     @BindView(R.id.contactList)
     ListView lvContactList;
@@ -106,7 +107,6 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
 
             }
         });
-
         return fragmentView;
     }
 
@@ -153,7 +153,7 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 // Get the Cursor
-        Cursor cursor = ((CursorAdapter)parent.getAdapter()).getCursor();
+        Cursor cursor = ((CursorAdapter) parent.getAdapter()).getCursor();
         // Move to the selected contact
         cursor.moveToPosition(position);
         // Get the _ID value
@@ -163,7 +163,7 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
         // Create the contact's content Uri
         mContactUri = ContactsContract.Contacts.getLookupUri(mContactId, mContactKey);
 
-        Cursor phones = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ mContactId,null, null);
+        Cursor phones = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + mContactId, null, null);
         if (phones != null) {
             while (phones.moveToNext()) {
                 String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
@@ -176,8 +176,28 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
          * You can use mContactUri as the content URI for retrieving
          * the details for a contact.
          */
-        if (mContactDetailFragment != null && mContactDetailFragment.getDialog() != null && mContactDetailFragment.getDialog().isShowing()) return;
-        mContactDetailFragment = ContactDetailDialogFragment.getInstance(mContactUri);
+        if (mContactDetailFragment == null) {
+            mContactDetailFragment = ContactDetailDialogFragment.getInstance(mContactUri);
+            mContactDetailFragment.setOnDialogFragmentClickListener(this);
+        }
+        if (mContactDetailFragment != null && mContactDetailFragment.getDialog() != null && mContactDetailFragment.getDialog().isShowing())
+            return;
+        mContactDetailFragment.updateContactUri(mContactUri);
         mContactDetailFragment.show(getChildFragmentManager(), "");
+    }
+
+    @Override
+    public void onDismiss() {
+
+    }
+
+    @Override
+    public void onClickAdd() {
+        ((MainActivity)getActivity()).updateReminderList();
+    }
+
+    @Override
+    public void onClickCancel() {
+
     }
 }

@@ -3,9 +3,14 @@ package com.phonereminder.ryutb.phonereminder.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.phonereminder.ryutb.phonereminder.model.ReminderItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ryutb on 12/01/2018.
@@ -18,12 +23,16 @@ public class SharePrefUtil {
     }
 
     public static void putReminderItem(Context ctx, ReminderItem item) {
-        getSharedPref(ctx).edit().putString(item.getPhone(), (new Gson()).toJson(item)).apply();
+        List<ReminderItem> list = getReminderListItem(ctx);
+        list.add(item);
+        getSharedPref(ctx).edit().putString(Constants.SHAREDPREF_REMINDER_LIST_ITEM, (new Gson()).toJson(list)).apply();
     }
 
-    public static ReminderItem getReminderItem(Context ctx, String phone) {
-        String itemString = getSharedPref(ctx).getString(phone, "{}");
-        return (new Gson()).fromJson(itemString, ReminderItem.class);
+    public static List<ReminderItem> getReminderListItem(Context ctx) {
+        String itemString = getSharedPref(ctx).getString(Constants.SHAREDPREF_REMINDER_LIST_ITEM, null);
+        if (TextUtils.isEmpty(itemString)) return new ArrayList<>();
+        List<ReminderItem> list = (new Gson()).fromJson(itemString, new TypeToken<List<ReminderItem>>() {}.getType());
+        return list;
     }
 
 }
