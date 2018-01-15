@@ -176,13 +176,10 @@ public class ContactListFragment extends BaseFragment implements LoaderManager.L
          * You can use mContactUri as the content URI for retrieving
          * the details for a contact.
          */
-        if (mContactDetailFragment == null) {
-            mContactDetailFragment = ContactDetailDialogFragment.getInstance(mContactUri);
-            mContactDetailFragment.setOnDialogFragmentClickListener(this);
-        }
         if (mContactDetailFragment != null && mContactDetailFragment.getDialog() != null && mContactDetailFragment.getDialog().isShowing())
             return;
-        mContactDetailFragment.updateContactUri(mContactUri);
+        mContactDetailFragment = ContactDetailDialogFragment.getInstance(mContactUri);
+        mContactDetailFragment.setOnDialogFragmentClickListener(this);
         mContactDetailFragment.show(getChildFragmentManager(), "");
     }
 

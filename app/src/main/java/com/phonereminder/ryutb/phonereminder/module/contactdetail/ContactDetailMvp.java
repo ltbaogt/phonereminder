@@ -14,10 +14,14 @@ public interface ContactDetailMvp extends Mvp.View {
     interface View extends Mvp.View {
         void displayName();
         void displayPhone();
+
+        void displayNote(String note);
     }
 
     interface Presenter extends Mvp.Presenter<View, Model> {
         void renderName();
         void renderPhone();
+
+        void renderNote(String note);
     }
 }

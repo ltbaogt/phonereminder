@@ -9,10 +9,10 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.base.BaseDialogFragment;
-import com.phonereminder.ryutb.phonereminder.control.AppEditText;
 import com.phonereminder.ryutb.phonereminder.control.AppTextView;
 import com.phonereminder.ryutb.phonereminder.model.ReminderItem;
 import com.phonereminder.ryutb.phonereminder.util.Constants;
@@ -43,7 +43,7 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
     @BindView(R.id.tvPhone)
     AppTextView tvPhone;
     @BindView(R.id.etNote)
-    AppEditText etNote;
+    EditText etNote;
 
     @OnClick(R.id.btnPos)
     void createReminder() {
@@ -85,9 +85,16 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
         mUnbinder = ButterKnife.bind(this, fragmentView);
         mContactUri = Uri.parse(getArguments().getString(Constants.CONTACT_URI));
         setupMvp();
+        return fragmentView;
+    }
+
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mPresenter.renderName();
         mPresenter.renderPhone();
-        return fragmentView;
+        mPresenter.renderNote("");
     }
 
     @Override
@@ -156,5 +163,10 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
             mContactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
             tvPhone.setText(tvPhone.getText() + "\n" + mContactNumber);
         }
+    }
+
+    @Override
+    public void displayNote(String note) {
+        etNote.setText(note);
     }
 }

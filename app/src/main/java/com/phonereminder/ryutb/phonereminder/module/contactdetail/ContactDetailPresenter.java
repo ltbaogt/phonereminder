@@ -26,6 +26,11 @@ public class ContactDetailPresenter extends BasePresenter<ContactDetailMvp.View,
     }
 
     @Override
+    public void renderNote(String note) {
+        getView().displayNote(note);
+    }
+
+    @Override
     public ContactDetailMvp.View createDummyView() {
         return new ContactDetailMvp.View() {
             @Override
@@ -35,6 +40,11 @@ public class ContactDetailPresenter extends BasePresenter<ContactDetailMvp.View,
 
             @Override
             public void displayPhone() {
+
+            }
+
+            @Override
+            public void displayNote(String note) {
 
             }
 
