@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -34,6 +33,7 @@ import java.util.List;
 public class BubbleManagementService extends Service {
 
     private BubblesManager bubblesManager;
+    private BubbleLayout mCurrentBubble;
     private BroadcastReceiver mPhoneCallReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -46,11 +46,16 @@ public class BubbleManagementService extends Service {
                 if (list != null) {
                     for (ReminderItem item : list) {
                         if (item.getPhone().equalsIgnoreCase(phoneNumber)) {
-                            addNewBubble();
+                            mCurrentBubble = addNewBubble(item);
+                            return;
                         }
                     }
                 }
-            } else {
+            } else if (TelephonyManager.EXTRA_STATE_IDLE.equalsIgnoreCase(state)) {
+//                if (bubblesManager != null && mCurrentBubble != null)
+//                    bubblesManager.removeBubble(mCurrentBubble);
+            }
+            else {
                 Toast.makeText(context, state, Toast.LENGTH_SHORT).show();
             }
         }
@@ -89,13 +94,8 @@ public class BubbleManagementService extends Service {
         bubblesManager.initialize();
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        addNewBubble();
-        return super.onStartCommand(intent, flags, startId);
-    }
-
-    private void addNewBubble() {
+    private BubbleLayout addNewBubble(ReminderItem item) {
+        final String note = item.getNote();
         BubbleLayout bubbleView = (BubbleLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.bubble_layout, null);
         animateNotification(bubbleView.findViewById(R.id.ic_notifications));
         bubbleView.setOnBubbleRemoveListener(new BubbleLayout.OnBubbleRemoveListener() {
@@ -107,13 +107,13 @@ public class BubbleManagementService extends Service {
 
             @Override
             public void onBubbleClick(BubbleLayout bubble) {
-                String str = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("ABC", "---");
-                Toast.makeText(getApplicationContext(), "Clicked !" + str,
+                Toast.makeText(getApplicationContext(), note,
                         Toast.LENGTH_SHORT).show();
             }
         });
         bubbleView.setShouldStickToWall(true);
         bubblesManager.addBubble(bubbleView, 60, 20);
+        return bubbleView;
     }
 
     public void animateNotification(View view) {
