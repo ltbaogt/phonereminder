@@ -26,4 +26,9 @@
         <item name="android:textSize">14sp</item>
         <item name="customFont">@string/customFont_OpenSans_Semibold</item>
     </style>
+
+    <declare-styleable name="RichPathView">
+        <attr name="vector" format="reference" />
+    </declare-styleable>
+
 </resources>
