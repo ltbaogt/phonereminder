@@ -2,6 +2,7 @@ package com.phonereminder.ryutb.phonereminder.control;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -37,7 +38,7 @@ public class ConnectingWaveAnimationView extends View {
     private void init() {
         paint = new Paint();
         paint.setAntiAlias(true);
-        paint.setColor(0xffffd922);
+        paint.setColor(Color.parseColor("#32F5F5F5"));
     }
 
     @Override

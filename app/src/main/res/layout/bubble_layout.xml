@@ -23,6 +23,7 @@
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
 <com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/bubblewith"
     android:layout_height="@dimen/bubblewith"
     android:clipChildren="false"
@@ -33,20 +34,12 @@
         android:layout_height="@dimen/bubblewith" />
 
     <FrameLayout
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:background="@drawable/profile_decorator"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
@@ -57,5 +50,11 @@
             android:text="1"
             android:textColor="@color/white"
             android:textSize="15sp" />
+
+        <com.phonereminder.ryutb.phonereminder.libs.richpath.richpath.RichPathView
+            android:id="@+id/ic_notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:vector="@drawable/ic_notifications" />
     </FrameLayout>
 </com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout>

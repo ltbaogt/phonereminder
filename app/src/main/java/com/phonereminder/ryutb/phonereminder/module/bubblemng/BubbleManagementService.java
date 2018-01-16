@@ -11,12 +11,17 @@ import android.support.annotation.Nullable;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.bubbles.BubbleLayout;
 import com.phonereminder.ryutb.phonereminder.bubbles.BubblesManager;
 import com.phonereminder.ryutb.phonereminder.bubbles.OnInitializedCallback;
+import com.phonereminder.ryutb.phonereminder.libs.richpath.animator.RichPathAnimator;
+import com.phonereminder.ryutb.phonereminder.libs.richpath.richpath.RichPath;
+import com.phonereminder.ryutb.phonereminder.libs.richpath.richpath.RichPathView;
 import com.phonereminder.ryutb.phonereminder.model.ReminderItem;
 import com.phonereminder.ryutb.phonereminder.util.SharePrefUtil;
 
@@ -92,6 +97,7 @@ public class BubbleManagementService extends Service {
 
     private void addNewBubble() {
         BubbleLayout bubbleView = (BubbleLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.bubble_layout, null);
+        animateNotification(bubbleView.findViewById(R.id.ic_notifications));
         bubbleView.setOnBubbleRemoveListener(new BubbleLayout.OnBubbleRemoveListener() {
             @Override
             public void onBubbleRemoved(BubbleLayout bubble) {
@@ -108,5 +114,23 @@ public class BubbleManagementService extends Service {
         });
         bubbleView.setShouldStickToWall(true);
         bubblesManager.addBubble(bubbleView, 60, 20);
+    }
+
+    public void animateNotification(View view) {
+        if (view == null || !(view instanceof RichPathView)) return;
+        final RichPath top = ((RichPathView)view).findRichPathByIndex(0);
+        final RichPath bottom = ((RichPathView)view).findRichPathByIndex(1);
+
+        RichPathAnimator.animate(top)
+                .interpolator(new DecelerateInterpolator())
+                .rotation(0, 20, -20, 10, -10, 5, -5, 2, -2, 0)
+                .duration(4000)
+                .andAnimate(bottom)
+                .interpolator(new DecelerateInterpolator())
+                .rotation(0, 10, -10, 5, -5, 2, -2, 0)
+                .startDelay(50)
+                .duration(4000)
+                .repeatCountSet(RichPathAnimator.INFINITE)
+                .start();
     }
 }
