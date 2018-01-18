@@ -9,10 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.base.BaseFragment;
+import com.phonereminder.ryutb.phonereminder.libs.fab.floatingactionbutton.FloatingActionButton;
+import com.phonereminder.ryutb.phonereminder.libs.fab.floatingactionbutton.FloatingActionsMenu;
 import com.phonereminder.ryutb.phonereminder.module.contactdetail.ContactDetailDialogFragment;
 import com.phonereminder.ryutb.phonereminder.module.main.MainActivity;
 
@@ -30,8 +31,10 @@ public class ContactListFragment2 extends BaseFragment implements ContactDetailD
 
     private static final int RESULT_PICK_CONTACT = 999;
     private ContactDetailDialogFragment mContactDetailFragment;
-    @BindView(R.id.btnPickContact)
-    Button btnPickContact;
+    @BindView(R.id.action_b)
+    FloatingActionButton btnPickContact;
+    @BindView(R.id.multipleActions)
+    FloatingActionsMenu multipleActions;
 
     @Nullable
     @Override
@@ -46,6 +49,7 @@ public class ContactListFragment2 extends BaseFragment implements ContactDetailD
                 Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                 startActivityForResult(contactPickerIntent, RESULT_PICK_CONTACT);
+                multipleActions.collapse();
             }
         });
         return fragmentView;

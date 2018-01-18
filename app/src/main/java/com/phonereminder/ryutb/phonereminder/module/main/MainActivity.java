@@ -2,7 +2,6 @@ package com.phonereminder.ryutb.phonereminder.module.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         mContactListFragment = new ContactListFragment2();
         mReminderListFragment = new ReminderListFragment();
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("ABC", "ABC---").apply();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contactList, mContactListFragment)
                 .commit();
