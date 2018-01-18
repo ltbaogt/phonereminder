@@ -7,18 +7,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.phonereminder.ryutb.phonereminder.R;
+import com.phonereminder.ryutb.phonereminder.libs.swipe.SwipeRevealLayout;
+import com.phonereminder.ryutb.phonereminder.libs.swipe.ViewBinderHelper;
 import com.phonereminder.ryutb.phonereminder.model.ReminderItem;
+import com.phonereminder.ryutb.phonereminder.util.SharePrefUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by ryutb on 12/01/2018.
  */
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+    private final ViewBinderHelper mBinderHelper = new ViewBinderHelper();
     private List<ReminderItem> mList;
 
     public Adapter(List<ReminderItem> list) {
@@ -35,6 +40,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String formatString = String.format("%1$s - %2$s", mList.get(position).getPhone(), mList.get(position).getNote());
+        mBinderHelper.bind((SwipeRevealLayout) holder.itemView, formatString);
         holder.tvName.setText(formatString);
     }
 
@@ -48,9 +54,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvName)
         TextView tvName;
+
+        @OnClick(R.id.btnDelete)
+        void deleteReminder() {
+            ReminderItem removeItem = mList.get(getAdapterPosition());
+            SharePrefUtil.removeReminderItem(itemView.getContext(), removeItem);
+            mList.remove(removeItem);
+            notifyDataSetChanged();
+        }
 
         public ViewHolder(View itemView) {
             super(itemView);

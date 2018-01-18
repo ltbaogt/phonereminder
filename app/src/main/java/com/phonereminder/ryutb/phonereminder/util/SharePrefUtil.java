@@ -28,6 +28,18 @@ public class SharePrefUtil {
         getSharedPref(ctx).edit().putString(Constants.SHAREDPREF_REMINDER_LIST_ITEM, (new Gson()).toJson(list)).apply();
     }
 
+    public static void removeReminderItem(Context ctx, ReminderItem item) {
+        List<ReminderItem> list = getReminderListItem(ctx);
+        String phone = item.getPhone();
+        for (ReminderItem i : list) {
+            if (i.getPhone().equalsIgnoreCase(phone)) {
+                list.remove(i);
+                break;
+            }
+        }
+        getSharedPref(ctx).edit().putString(Constants.SHAREDPREF_REMINDER_LIST_ITEM, (new Gson()).toJson(list)).apply();
+    }
+
     public static List<ReminderItem> getReminderListItem(Context ctx) {
         String itemString = getSharedPref(ctx).getString(Constants.SHAREDPREF_REMINDER_LIST_ITEM, null);
         if (TextUtils.isEmpty(itemString)) return new ArrayList<>();

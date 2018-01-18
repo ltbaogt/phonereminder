@@ -4,6 +4,9 @@
     <string name="customFont_OpenSans_Semibold">OpenSans-Semibold.ttf</string>
     <string name="customFont_OpenSans_Italic">OpenSans-Italic.ttf</string>
     <string name="customFont_OpenSans_Regular">OpenSans-Regular.ttf</string>
+    <string name="customFont_FontAwesome">FontAwesome.ttf</string>
     <string name="content_main_str_add_from_contact_list">Thêm từ danh bạ</string>
     <string name="content_main_str_add_from_custom">Thêm số bất kỳ</string>
+    <string name="str_ic_trash_o">&#xf014;</string>
+    <string name="reminder_item_layout_str_delete">Xóa</string>
 </resources>
