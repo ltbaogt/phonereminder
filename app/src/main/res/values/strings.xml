@@ -4,4 +4,6 @@
     <string name="customFont_OpenSans_Semibold">OpenSans-Semibold.ttf</string>
     <string name="customFont_OpenSans_Italic">OpenSans-Italic.ttf</string>
     <string name="customFont_OpenSans_Regular">OpenSans-Regular.ttf</string>
+    <string name="content_main_str_add_from_contact_list">Thêm từ danh bạ</string>
+    <string name="content_main_str_add_from_custom">Thêm số bất kỳ</string>
 </resources>

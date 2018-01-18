@@ -68,4 +68,14 @@
     <color name="grey_transparent">#868e8888</color>
     <color name="btn_login_disable">@color/grey_transparent</color>
     <color name="background_grey">#F8F8F8</color>
+
+    <!--FAB-->
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
 </resources>
