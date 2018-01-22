@@ -53,11 +53,9 @@ public class MainActivity extends AppCompatActivity {
         mContactListFragment = new ContactListFragment2();
         mReminderListFragment = new ReminderListFragment();
         getSupportFragmentManager().beginTransaction()
+                .replace(R.id.permissionLayout, new PermissionFragment())
                 .replace(R.id.contactList, mContactListFragment)
-                .commit();
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.reminderList, new PermissionFragment())
+                .replace(R.id.reminderList, mReminderListFragment)
                 .commit();
     }
 

@@ -33,7 +33,7 @@ public class ReminderListFragment extends BaseFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View fragmentView = inflater.inflate(R.layout.reminder_list_fragment_layout, container, false);
         ButterKnife.bind(this, fragmentView);
-        List<ReminderItem> list = SharePrefUtil.getReminderListItem(getContext());
+        List<ReminderItem> list = SharePrefUtil.getReminderListItem(getContext().getApplicationContext());
         mAdapter = new Adapter(list);
         reminderList.setAdapter(mAdapter);
         return fragmentView;

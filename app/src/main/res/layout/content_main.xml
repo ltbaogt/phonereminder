@@ -35,22 +35,32 @@
             android:text="Stop" />
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
         <FrameLayout
-            android:id="@+id/reminderList"
+            android:id="@+id/permissionLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
         <FrameLayout
-            android:layout_gravity="bottom|left"
-            android:id="@+id/contactList"
-            android:layout_marginBottom="@dimen/common_margin_content"
-            android:layout_marginRight="@dimen/common_margin_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
 
-    </FrameLayout>
+            <FrameLayout
+                android:id="@+id/reminderList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <FrameLayout
+                android:layout_gravity="bottom|left"
+                android:id="@+id/contactList"
+                android:layout_marginBottom="@dimen/common_margin_content"
+                android:layout_marginRight="@dimen/common_margin_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+    </LinearLayout>
+
 </LinearLayout>
