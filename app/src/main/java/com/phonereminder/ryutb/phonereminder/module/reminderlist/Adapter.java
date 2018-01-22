@@ -40,7 +40,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         String formatString = String.format("%1$s - %2$s", mList.get(position).getPhone(), mList.get(position).getNote());
-        mBinderHelper.bind((SwipeRevealLayout) holder.itemView, formatString);
+        mBinderHelper.bind((SwipeRevealLayout) holder.itemView.findViewById(R.id.swipeRevealLayout), formatString);
         holder.tvName.setText(formatString);
     }
 
