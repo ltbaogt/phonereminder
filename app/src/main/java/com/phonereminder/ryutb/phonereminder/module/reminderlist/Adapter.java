@@ -61,7 +61,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         @OnClick(R.id.btnDelete)
         void deleteReminder() {
             ReminderItem removeItem = mList.get(getAdapterPosition());
-            SharePrefUtil.removeReminderItem(itemView.getContext(), removeItem);
+            SharePrefUtil.getInstace(itemView.getContext()).removeReminderItem(itemView.getContext(), removeItem);
             mList.remove(removeItem);
             notifyDataSetChanged();
         }

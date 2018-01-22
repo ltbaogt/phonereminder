@@ -48,7 +48,7 @@ public class ContactDetailDialogFragment extends BaseDialogFragment implements C
     @OnClick(R.id.btnPos)
     void createReminder() {
         ReminderItem item = new ReminderItem(mContactName, mContactNumber, etNote.getText().toString().trim());
-        SharePrefUtil.putReminderItem(getContext(), item);
+        SharePrefUtil.getInstace(getContext()).putReminderItem(getContext(), item);
         dismiss();
         if (mlistener != null) mlistener.onClickAdd();
     }

@@ -42,7 +42,7 @@ public class BubbleManagementService extends Service {
             String phoneNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             phoneNumber = phoneNumber == null ? "" : phoneNumber;
             if (TelephonyManager.EXTRA_STATE_RINGING.equalsIgnoreCase(state)) {
-                List<ReminderItem> list = SharePrefUtil.getReminderListItem(getApplicationContext());
+                List<ReminderItem> list = SharePrefUtil.getInstace(getApplicationContext()).getReminderListItem(getApplicationContext());
                 if (list != null) {
                     for (ReminderItem item : list) {
                         if (item.getPhone().equalsIgnoreCase(phoneNumber)) {
