@@ -9,4 +9,7 @@
     <string name="content_main_str_add_from_custom">Thêm số bất kỳ</string>
     <string name="str_ic_trash_o">&#xf014;</string>
     <string name="reminder_item_layout_str_delete">Xóa</string>
+    <string name="permission_str_draw_overlay">Draw overlay</string>
+    <string name="permission_str_permission_read_contact">Đọc danh sách Liên hệ</string>
+    <string name="permission_str_permission_read_phone_state">Đọc trạng thái cuộc gọi</string>
 </resources>

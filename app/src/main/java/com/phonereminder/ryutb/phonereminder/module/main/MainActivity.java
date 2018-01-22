@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.phonereminder.ryutb.phonereminder.R;
 import com.phonereminder.ryutb.phonereminder.module.bubblemng.BubbleManagementService;
 import com.phonereminder.ryutb.phonereminder.module.contactlist.ContactListFragment2;
+import com.phonereminder.ryutb.phonereminder.module.permission.PermissionFragment;
 import com.phonereminder.ryutb.phonereminder.module.reminderlist.ReminderListFragment;
 
 import butterknife.BindView;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.reminderList, mReminderListFragment)
+                .replace(R.id.reminderList, new PermissionFragment())
                 .commit();
     }
 
